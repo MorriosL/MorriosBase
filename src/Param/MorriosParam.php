@@ -38,8 +38,8 @@ class MorriosParam
      */
     protected function initByArray()
     {
-        foreach ($this as $property => $vale) {
-            $this->$property = $data[$property] ?? $vale;
+        foreach ($this as $property => $value) {
+            $this->$property = $this->originData[$property] ?? $value;
         }
     }
 
