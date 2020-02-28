@@ -10,7 +10,10 @@
         }
     ],
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "ext-libxml": "*",
+        "ext-json": "*",
+        "ext-simplexml": "*"
     },
     "autoload": {
         "psr-4": {
