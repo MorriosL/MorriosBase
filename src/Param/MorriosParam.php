@@ -22,6 +22,11 @@ class MorriosParam
     protected $originData;
 
     /**
+     * @var array
+     */
+    protected $filterProperties = ['originData', 'filterProperties'];
+
+    /**
      * MorriosParam constructor.
      *
      * @param array $data
@@ -39,7 +44,7 @@ class MorriosParam
     protected function initByArray()
     {
         foreach ($this as $property => $value) {
-            $this->$property = $this->originData[$property] ?? $value;
+            if (!in_array($property, $this->filterProperties)) $this->$property = $this->originData[$property] ?? $value;
         }
     }
 
@@ -53,7 +58,7 @@ class MorriosParam
         $data = [];
 
         foreach ($this as $property => $vale) {
-            $data[$property] = $vale;
+            if (!in_array($property, $this->filterProperties)) $data[$property] = $vale;
         }
 
         return $data;
