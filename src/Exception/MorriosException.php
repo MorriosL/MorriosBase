@@ -10,6 +10,7 @@ namespace Morrios\Base\Exception;
 
 
 use Exception;
+use Throwable;
 
 /**
  * Class MorriosException
@@ -19,7 +20,7 @@ use Exception;
 class MorriosException extends Exception
 {
     /**
-     * @var string
+     * @var int
      */
     protected $errorCode;
 
@@ -29,9 +30,19 @@ class MorriosException extends Exception
     protected $errorMessage;
 
     /**
+     * MorriosException constructor.
+     *
+     * @param Throwable|null $previous
+     */
+    public function __construct(Throwable $previous = null)
+    {
+        parent::__construct($this->getErrorMessage(), $this->getErrorCode(), $previous);
+    }
+
+    /**
      * getErrorCode
      *
-     * @return string
+     * @return int
      */
     public function getErrorCode()
     {

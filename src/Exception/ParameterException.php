@@ -1,29 +1,29 @@
 <?php
 /**
- * BusinessException.php
+ * ParameterException.php
  *
  * @author  Carl <morrios@163.com>
- * @ctime   2020/2/21 4:50 下午
+ * @ctime   2020/3/9 3:08 下午
  */
 
 namespace Morrios\Base\Exception;
 
 
 /**
- * Class BusinessException
+ * Class ParameterException
  *
  * @package Morrios\Base\Exception
  */
-class BusinessException extends MorriosException
+class ParameterException extends MorriosException
 {
     /**
-     * BusinessException constructor.
+     * ParameterException constructor.
      *
      * @param string $errorMessage
      */
     public function __construct(string $errorMessage)
     {
-        $this->errorMessage = 'Business Error:' . $errorMessage;
+        $this->errorMessage = 'Parameter Error:' . $errorMessage;
         $this->errorCode    = E_ERROR;
 
         parent::__construct();
