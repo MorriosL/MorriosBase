@@ -41,7 +41,7 @@ class GuzzleHelper
      * @param string            $baseUri
      * @param HandlerStack|null $handler
      */
-    private function __construct(string $baseUri, HandlerStack $handler = null)
+    private function __construct(string $baseUri, HandlerStack $handler)
     {
         $config = ['base_uri' => $baseUri];
         if ($handler) $config['handler'] = $handler;
@@ -59,15 +59,16 @@ class GuzzleHelper
     /**
      * instance
      *
-     * @param string $baseUri
+     * @param string            $baseUri
+     * @param HandlerStack|null $handler
      * @return GuzzleHelper
      */
-    public static function instance(string $baseUri): GuzzleHelper
+    public static function instance(string $baseUri, HandlerStack $handler = null): GuzzleHelper
     {
         $instanceKey = md5($baseUri);
 
         if (!(self::$instances[$instanceKey] ?? null) instanceof GuzzleHelper) {
-            self::$instances[$instanceKey] = new self($baseUri);
+            self::$instances[$instanceKey] = new self($baseUri, $handler);
         }
 
         return self::$instances[$instanceKey];
@@ -106,13 +107,15 @@ class GuzzleHelper
      * @param string       $uri
      * @param array|string $params
      * @param array        $query
+     * @param array        $headers
      * @return array|string
      */
-    public function post(string $uri, $params = [], array $query = [])
+    public function post(string $uri, $params = [], array $query = [], array $headers = [])
     {
         $responseInterface = $this->client->post($uri, [
             $this->paramsType => $params,
             'query'           => $query,
+            'headers'         => $headers,
         ]);
 
         return $this->_parseResponse($responseInterface);
