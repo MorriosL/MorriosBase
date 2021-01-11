@@ -10,6 +10,7 @@ namespace Morrios\Base\Helper;
 
 
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -37,11 +38,15 @@ class GuzzleHelper
     /**
      * Request constructor.
      *
-     * @param string $baseUri
+     * @param string            $baseUri
+     * @param HandlerStack|null $handler
      */
-    private function __construct(string $baseUri)
+    private function __construct(string $baseUri, HandlerStack $handler = null)
     {
-        $this->client = new Client(['base_uri' => $baseUri]);
+        $config = ['base_uri' => $baseUri];
+        if ($handler) $config['handler'] = $handler;
+
+        $this->client = new Client($config);
     }
 
     /**
@@ -57,7 +62,7 @@ class GuzzleHelper
      * @param string $baseUri
      * @return GuzzleHelper
      */
-    public static function instance(string $baseUri)
+    public static function instance(string $baseUri): GuzzleHelper
     {
         $instanceKey = md5($baseUri);
 

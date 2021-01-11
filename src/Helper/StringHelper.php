@@ -9,8 +9,6 @@
 namespace Morrios\Base\Helper;
 
 
-use Exception;
-
 /**
  * Class StringHelper
  *
@@ -23,18 +21,13 @@ class StringHelper
      *
      * @param int $length
      * @return string
-     * @throws Exception
      */
-    public static function random($length = 16)
+    public static function random($length = 16): string
     {
         $string = '';
 
         while (($len = strlen($string)) < $length) {
-            $size = $length - $len;
-
-            $bytes = function_exists('random_bytes') ? random_bytes($size) : mt_rand();
-
-            $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
+            $string .= substr(str_replace(['/', '+', '='], '', base64_encode(mt_rand())), 0, $length - $len);
         }
 
         return $string;

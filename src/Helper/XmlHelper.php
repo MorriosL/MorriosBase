@@ -22,7 +22,7 @@ class XmlHelper
      * @param array $array
      * @return string
      */
-    public static function arrayToXml(array $array)
+    public static function arrayToXml(array $array): string
     {
         $xml = '<xml>';
         foreach ($array as $key => $val) {
@@ -43,7 +43,7 @@ class XmlHelper
      * @param string $xml
      * @return array|null
      */
-    public static function xmlToArray(string $xml)
+    public static function xmlToArray(string $xml): array
     {
         libxml_disable_entity_loader(true);
 
