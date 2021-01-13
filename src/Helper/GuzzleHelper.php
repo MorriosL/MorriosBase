@@ -90,12 +90,14 @@ class GuzzleHelper
      *
      * @param string $uri
      * @param array  $params
+     * @param array  $headers
      * @return array|string
      */
-    public function get(string $uri, array $params = [])
+    public function get(string $uri, array $params = [], array $headers = [])
     {
         $response = $this->client->get($uri, [
-            'query' => $params,
+            'query'   => $params,
+            'headers' => $headers,
         ]);
 
         return $this->_parseResponse($response);
