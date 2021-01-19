@@ -31,11 +31,11 @@ class MorriosParam
      *
      * @param array $data
      */
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
         $this->originData = $data;
 
-        $this->initByArray();
+        $data && $this->initByArray();
     }
 
     /**
